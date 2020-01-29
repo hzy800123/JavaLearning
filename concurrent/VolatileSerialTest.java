@@ -13,6 +13,7 @@ public class VolatileSerialTest {
         Map<String, Integer> resultMap = new HashMap<>();
         int resultCount = 0;
 
+        System.out.println("Calculation Start !");
         for (int i = 0; i < 1000000; i++ ) {
             x = 0;
             y = 0;
@@ -41,10 +42,13 @@ public class VolatileSerialTest {
 
             resultSet.add("( a=" + resultMap.get("a") + ", " + "b=" + resultMap.get("b") + " )");
             if ( resultSet.size() > resultCount ) {
-                System.out.println(Arrays.asList(resultSet));
+                System.out.print("Calculation count: " + (i + 1) + " - ");
+                System.out.println("The resultSet: " + Arrays.asList(resultSet));
+                System.out.println("Calculation continues...");
                 // System.out.println(Collections.singletonList(resultSet));
                 resultCount = resultSet.size();
             }
         }
+        System.out.println("Calculation Complete !");
     }
 }
