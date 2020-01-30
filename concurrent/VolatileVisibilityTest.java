@@ -6,19 +6,18 @@ package Java.concurrent;
  */
 
 public class VolatileVisibilityTest {
-    // private static boolean initFlag = false;
-    private static volatile boolean initFlag = false;
+    private static boolean initFlag = false;
+    // private static volatile boolean initFlag = false;
+    static final Object object = new Object();
 
     public static void main(String[] args) throws InterruptedException {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                System.out.println("Waiting for data...");
-                while (!initFlag) {
-                }
-                System.out.println("=========== Success !");
+                refresh();
+                // refresh2();
             }
-        }).start();
+        }, "Thread A").start();
 
         Thread.sleep(2000);
 
@@ -27,13 +26,37 @@ public class VolatileVisibilityTest {
             public void run() {
                 prepareData();
             }
-        }).start();
+        },"Thread B").start();
+    }
+
+    public static void refresh() {
+        String threadName = Thread.currentThread().getName();
+        System.out.println(threadName + " - Waiting for data...");
+        int i = 0;
+        while (!initFlag) {
+        }
+        System.out.println(threadName + " - get the updated 'initFlag' value successfully === !");
+    }
+
+    public static void refresh2() {
+        String threadName = Thread.currentThread().getName();
+        System.out.println(threadName + " - Waiting for data...");
+        int i = 0;
+        while (!initFlag) {
+            // This 'synchronized' will trigger blocking and to re-load the updated value
+            // 线程的上下文切换，需要加载最新的值，保存到 TSS任务状态栈（保存现场）
+            synchronized (object) {
+                i++;
+            }
+        }
+        System.out.println(threadName + " - get the updated 'initFlag' value successfully === !");
     }
 
     public static void prepareData() {
-        System.out.println("Start to prepare data...");
+        String threadName = Thread.currentThread().getName();
+        System.out.println(threadName + " - Prepare data Start...");
         initFlag = true;
-        System.out.println("Prepare data complete...");
+        System.out.println(threadName + " - Prepare data complete and update the shared 'initFlag' value...");
     }
 
 }
