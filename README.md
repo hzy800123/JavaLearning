@@ -9,6 +9,7 @@
 
 https://segmentfault.com/a/1190000017457234
 
+
 ### 2. Singleton Pattern 
 Java设计模式：深入理解 单例模式
 
