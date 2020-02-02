@@ -19,6 +19,10 @@ public class SingletonMultiThreadTest {
 
                     resultSet.add(Integer.toString(instance.hashCode()));
                     printSingletonInstance(j, instance);
+
+                    System.out.println("Thread " + j + " - value = " + instance.getValue());
+                    instance.setValue(j);
+                    System.out.println("Thread " + j + " - value = " + instance.getValue());
                 }
             });
         }
@@ -36,6 +40,8 @@ public class SingletonMultiThreadTest {
         System.out.println("------");
         System.out.println("The resultSet of 'Instance Hash Code': " + Collections.singletonList(resultSet));
         System.out.println("Total running time: " + (endTime - startTime) + " ms");
+        Singleton instance = Singleton.INSTANCE;
+        System.out.println(" Final value = " + instance.getValue());
     }
 
     private static void printSingletonInstance(int j, Singleton instance) {

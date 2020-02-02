@@ -9,6 +9,7 @@ public class Singleton {
         INSTANCE;
 
         private final Singleton instance;
+        
         EnumSingleton() {
             instance = new Singleton();
         }

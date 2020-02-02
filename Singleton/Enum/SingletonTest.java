@@ -9,12 +9,6 @@ public class SingletonTest {
         Set<String> resultSet = new HashSet<>();
         int total = 1000;
 
-        Singleton instance2 = Singleton.INSTANCE;
-        System.out.println("value = " + instance2.getValue());
-        instance2.setValue(2);
-        System.out.println("value = " + instance2.getValue());
-        System.out.println("instance2 Hash Code: " + instance2.hashCode());
-
         long startTime = System.currentTimeMillis();
         for( int i = 0; i < total; i++ ){
             Singleton instance = Singleton.INSTANCE;
