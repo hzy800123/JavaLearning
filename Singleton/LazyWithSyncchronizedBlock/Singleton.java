@@ -8,6 +8,7 @@ public class Singleton {
     private Singleton(){
     }
 
+    // Safe Method below:
     public static Singleton getInstance(){
         synchronized (Singleton.class) {
             if ( instance == null ) {
@@ -16,4 +17,14 @@ public class Singleton {
         }
         return instance;
     }
+
+     // Unsafe Method below:
+//    public static Singleton getInstance(){
+//        if ( instance == null ) {
+//            synchronized (Singleton.class) {
+//                instance = new Singleton();
+//            }
+//        }
+//        return instance;
+//    }
 }

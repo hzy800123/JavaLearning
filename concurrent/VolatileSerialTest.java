@@ -53,7 +53,7 @@ public class VolatileSerialTest {
         // Solution 2 ( --- End --- )
 
         System.out.println("Calculation Start !");
-        for (int i = 0; i < 1000000; i++ ) {
+        for (int i = 0; i < 10000000; i++ ) {
             x = 0;
             y = 0;
             resultMap.clear();
@@ -62,7 +62,7 @@ public class VolatileSerialTest {
                 @Override
                 public void run() {
                     a = y;
-                    unsafe.storeFence();    // Solution 2
+                    // unsafe.storeFence();    // Solution 2
                     x = 1;
                     resultMap.put("a", a);
                 }
@@ -72,7 +72,7 @@ public class VolatileSerialTest {
                 @Override
                 public void run() {
                     b = x;
-                    unsafe.storeFence();    // Solution 2
+                    // unsafe.storeFence();    // Solution 2
                     y = 1;
                     resultMap.put("b", b);
                 }
