@@ -6,9 +6,9 @@ package Java.CacheLinePadding;
 // 你会看到 Disruptor 消除这个问题，至少对于缓存行大小是64字节或更少的处理器架构来说是这样的,
 // 通过增加补全来确保ring buffer的序列号不会和其他东西同时存在于一个缓存行中。
 // Quoted from 'Disruptor':
-//	 public long p1, p2, p3, p4, p5, p6, p7;      // cache line padding
-//   private volatile long cursor = INITIAL_CURSOR_VALUE;
-//   public long p8, p9, p10, p11, p12, p13, p14; // cache line padding
+//  public long p1, p2, p3, p4, p5, p6, p7;      // cache line padding
+//  private volatile long cursor = INITIAL_CURSOR_VALUE;
+//  public long p8, p9, p10, p11, p12, p13, p14; // cache line padding
 // Unquoted
 // 因此没有伪共享，就没有和其它任何变量的意外冲突，没有不必要的缓存未命中。
 // 典型的 空间 换 时间 ! ! !
