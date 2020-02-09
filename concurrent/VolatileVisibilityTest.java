@@ -1,4 +1,4 @@
-package Java.concurrent;
+package Java.Concurrent;
 
 /*
  * --- Solution 1 ---

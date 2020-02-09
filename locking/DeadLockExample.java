@@ -1,4 +1,4 @@
-package Java.locking;
+package Java.Locking;
 
 public class DeadLockExample {
     public static void main(String[] args) {
