@@ -1,9 +1,9 @@
-package Java.MultiThreadInterview;
+package Java.MultiThreadInterview1A2B3C.Wait_Notify;
 
 // 面试（Interview)题 - 要求2个线程分别 交替打印 26个 数字和字母。
 // Expected Output Result:
 // 1 a 2 b ...... 26 z
-public class TwoThreadsCrossing {
+public class TwoThreadsWaitNotify {
     static volatile int number = 0;
 
     // Thread A - Print number (e.g. 1, 2... 26)

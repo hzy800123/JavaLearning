@@ -1,8 +1,8 @@
-package Java.MultiThreadInterview;
+package Java.MultiThreadInterview1A2B3C.Wait_Notify;
 
 public class TwoThreadsCrossingTest {
     public static void main(String[] args) {
-        TwoThreadsCrossing crossing = new TwoThreadsCrossing();
+        TwoThreadsWaitNotify crossing = new TwoThreadsWaitNotify();
 
         Thread threadA = new Thread(new Runnable() {
             @Override
