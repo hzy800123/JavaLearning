@@ -13,11 +13,12 @@ package Java.MultiThreadInterview1A2B3C.Wait_Notify;
 //
 // 在调用这3个方法的时候，当前线程必须获得这个对象的锁
 // 必须在作用等同于 synchronized(obj){......} 的内部，才能够去调用obj的wait与notify/notifyAll三个方法，否则就会报错
-public class TwoThreadsWaitNotify {
+public class TwoThreadsWaitNotifyWithOrder {
     private static volatile int number = 0;
+    private static volatile boolean t1Started = false;
 
     public static void main(String[] args) {
-        TwoThreadsWaitNotify crossing = new TwoThreadsWaitNotify();
+        TwoThreadsWaitNotifyWithOrder crossing = new TwoThreadsWaitNotifyWithOrder();
 
         Thread threadA = new Thread(new Runnable() {
             @Override
@@ -26,6 +27,7 @@ public class TwoThreadsWaitNotify {
                     for( int i = 0; i < 26; i++ ) {
                         try {
                             System.out.println(number+1);
+                            t1Started = true;
                             crossing.notify();
                             crossing.wait();    // 让出“锁”，并自己阻塞
                         } catch (InterruptedException e) {
@@ -41,6 +43,14 @@ public class TwoThreadsWaitNotify {
             @Override
             public void run() {
                 synchronized (crossing) {    // 先获得“锁”
+                    if (!t1Started) {
+                        try {
+                            crossing.wait();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
                     for( int i = 0; i < 26; i++ ) {
                         try {
                             System.out.println((char)((int)('a') + number));

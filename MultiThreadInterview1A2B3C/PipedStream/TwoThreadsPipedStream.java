@@ -1,6 +1,5 @@
 package Java.MultiThreadInterview1A2B3C.PipedStream;
 
-
 import java.io.IOException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
