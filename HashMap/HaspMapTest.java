@@ -3,6 +3,13 @@ package Java.HashMap;
 import java.util.HashMap;
 import java.util.Map;
 
+// HashMap
+// URL: https://blog.csdn.net/qunqunstyle99/article/details/86500028
+// 对 Key 求 Hash 值，然后再计算下标
+// 如果没有碰撞，直接放入桶中（碰撞的意思是计算得到的 Hash 值相同，需要放到同一个 bucket 中）
+// 如果碰撞了，以链表的方式链接到后面
+// 当链表的长度 大于 8 ( 即 >= 9 ) 的时候，会使用红黑树；如果链表长度很短的话，根本不需要引入红黑树，引入反而会慢。
+// Note: 阀值（TREEIFY THRESHOLD == 8）
 public class HaspMapTest {
     private String name;
     private int size;
