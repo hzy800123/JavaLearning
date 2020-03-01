@@ -1,5 +1,7 @@
 package Java.MultiThreadInterview1A2B3C.CountDownLatch;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 // CountDownLatch - “三二一，芝麻开门！”
@@ -40,32 +42,37 @@ public class TwoThreadsCountDownLatch {
             }
         });
 
-        Thread threadB = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                synchronized (crossing) {    // 先获得“锁”
+        Thread threadB = new Thread(() -> {
+            synchronized (crossing) {    // 先获得“锁”
+                try {
+                    latch.await();      // 等待计数器减为0，才继续执行。
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                for (int i = 0; i < 26; i++) {
+                    System.out.println((char) ((int) ('a') + number));
+                    number++;
                     try {
-                        latch.await();      // 等待计数器减为0，才继续执行。
+                        crossing.notify();
+                        crossing.wait();    // 让出“锁”，并自己阻塞
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-
-                    for (int i = 0; i < 26; i++) {
-                        System.out.println((char) ((int) ('a') + number));
-                        number++;
-                        try {
-                            crossing.notify();
-                            crossing.wait();    // 让出“锁”，并自己阻塞
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    crossing.notify();  // 最后一次，需要叫醒对方，否则无法停止程序
                 }
+                crossing.notify();  // 最后一次，需要叫醒对方，否则无法停止程序
             }
         });
 
         threadA.start();
         threadB.start();
+
+        List<String> t = new ArrayList<>();
+        t.add("a");
+        t.add("b");
+        t.forEach(System.out::println);
+
+        t.stream().filter((e) -> e.hashCode() > 1).forEach(System.out::println);
+
     }
 }

@@ -10,6 +10,11 @@ import java.util.Map;
 // 如果碰撞了，以链表的方式链接到后面
 // 当链表的长度 大于 8 ( 即 >= 9 ) 的时候，会使用红黑树；如果链表长度很短的话，根本不需要引入红黑树，引入反而会慢。
 // Note: 阀值（TREEIFY THRESHOLD == 8）
+//
+// 在Java 8 之前，HashMap和其他基于map的类都是通过链地址法解决冲突，它们使用单向链表来存储相同索引值的元素。
+// 在最坏的情况下，这种方式会将HashMap的get方法的性能从 O(1) 降低到 O(n)。
+// 在Java 8 开始，为了解决在频繁冲突时hashmap性能降低的问题，Java 8中使用 平衡树（红黑树） 来替代链表存储冲突的元素。
+// 这意味着我们可以将最坏情况下的性能从 O(n) 提高到 O(logn)。
 public class HaspMapTest {
     private String name;
     private int size;
