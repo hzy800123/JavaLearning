@@ -28,4 +28,36 @@ public class LumbdaTest {
         emps.forEach(System.out::println);
     }
 
+    @Test
+    public void test2() {
+        String str = " Hello Java 8 - Lambda !";
+        System.out.println(str);
+
+        String trimStr = strHandler(str, (strTmp) -> strTmp.trim());
+        System.out.println(trimStr);
+
+        String upperCaseStr = strHandler(str, (strTmp) -> strTmp.toUpperCase());
+        System.out.println(upperCaseStr);
+
+        String subStr = strHandler(str, (strTmp) -> strTmp.substring(7));
+        System.out.println(subStr);
+    }
+
+    @Test
+    public void test3() {
+        operationOnTwoNumbers(200L, 300L, (x, y) -> x + y);
+        operationOnTwoNumbers(200L, 300L, (x, y) -> x * y);
+    }
+
+    // Requirement:
+    // Process the String with multiple method
+    public String strHandler(String str, MyFunction mf) {
+        return mf.getValue(str);
+    }
+
+    // Requirement:
+    // Process for 2 'Long' numbers
+    public void operationOnTwoNumbers(Long l1, Long l2, MyFunction2<Long, Long> mf) {
+        System.out.println(mf.getValue(l1, l2));
+    }
 }

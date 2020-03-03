@@ -11,6 +11,10 @@ public class Employee {
     public Employee() {
     }
 
+    public Employee(int id) {
+        this.id = id;
+    }
+
     public Employee(String name) {
         this.name = name;
     }
