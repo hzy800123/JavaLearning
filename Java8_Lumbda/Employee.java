@@ -7,6 +7,7 @@ public class Employee {
     private String name;
     private int age;
     private double salary;
+    private Status status;
 
     public Employee() {
     }
@@ -29,6 +30,14 @@ public class Employee {
         this.name = name;
         this.age = age;
         this.salary = salary;
+    }
+
+    public Employee(int id, String name, int age, double salary, Status status) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.salary = salary;
+        this.status = status;
     }
 
     public int getId() {
@@ -63,6 +72,14 @@ public class Employee {
         this.salary = salary;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -79,6 +96,7 @@ public class Employee {
         return Objects.hash(id, name, age, salary);
     }
 
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -86,6 +104,13 @@ public class Employee {
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 ", salary=" + salary +
+                ", status=" + status +
                 '}';
+    }
+
+    public enum Status{
+        FREE,
+        BUSY,
+        ONLEAVE;
     }
 }
