@@ -1,0 +1,29 @@
+1. 是否听说过Spring的循环依赖？
+https://zhuanlan.zhihu.com/p/382066829
+
+一级缓存 singletonObjects： 就是存的 最终的成品
+二级缓存 earlySingletonObjects： 就是为存 半成品Bean
+三级缓存 singletonFactories： 就是为存 bean工厂
+
+
+
+2. 选择消息中间件MQ时，如何进行选型的考虑？例如：容错性等。
+
+https://juejin.cn/post/6850418106372882446
+消息队列面试连环问：如何保证消息不丢失？处理重复消息？消息有序性？消息堆积处理
+
+https://juejin.cn/post/6844903951834284045
+为什么要使用MQ消息中间件?这3个点让你彻底明白！
+
+
+
+3. Mybatis的#和$，哪个可以防止注入攻击？为什么？
+
+https://www.zhihu.com/question/26914370/answer/150328023
+Mybatis本身是基于JDBC封装的。
+#{parameter} 是预编译处理（PreparedStatement）范畴的。
+${parameter} 只是字符串替换。
+Mybatis在处理#时，会调用PreparedStatement的 set系列方法 来赋值；
+但是处理$时，只是把${parameter}替换成变量的值。
+
+因此，使用#{parameter}，可以有效的防止SQL注入攻击，提高系统安全性。
