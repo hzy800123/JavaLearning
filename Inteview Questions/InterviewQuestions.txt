@@ -20,6 +20,7 @@ https://juejin.cn/post/6844903951834284045
 3. Mybatis的#和$，哪个可以防止注入攻击？为什么？
 
 https://www.zhihu.com/question/26914370/answer/150328023
+
 Mybatis本身是基于JDBC封装的。
 #{parameter} 是预编译处理（PreparedStatement）范畴的。
 ${parameter} 只是字符串替换。
@@ -27,3 +28,13 @@ Mybatis在处理#时，会调用PreparedStatement的 set系列方法 来赋值�
 但是处理$时，只是把${parameter}替换成变量的值。
 
 因此，使用#{parameter}，可以有效的防止SQL注入攻击，提高系统安全性。
+
+进一步说明PreparedStatement:
+PreparedStatement是Statement的孩子，不同的是，PreparedStatement使用预编译机制，
+在创建PreparedStatement对象时就需要将SQL语句传入，传入的过程中参数要用？替代，
+这个过程会导致传入的SQL被进行预编译，然后再调用PreparedStatement的SetXXX将参数
+设置上去，由于SQL语句已经经过了预编译，再传入特殊值也已经不起作用（失效）了！
+
+画外音：
+只有数据被当成SQL去经历解析、编译，才有可能被数据库认识并执行（注入攻击），
+无意义的字符数据库是不会管的。
