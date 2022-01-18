@@ -1,0 +1,20 @@
+Redis Commands:
+
+-List 列表（允许存储重复元素）：
+lpush + lpop	// 实现 Stack堆栈 
+
+lpush + rpop	// 实现 List队列
+
+rpush + lpop	// 实现 List队列
+
+rpush + rpop	// 实现 Stack堆栈
+
+
+lpush + brpop = message queue // 阻塞的消息队列
+
+一个生产者 客户端：从左端队头插入元素，使用 lpush queueName msg1 msg2 msg3
+多个消费者 客户端：从右端队尾抢元素，使用 brpop queueName [timeOut]	
+
+e.g. 
+brpop queueName 10	// 等待10秒
+brpop queueName 0 	// 一直等待阻塞下去
